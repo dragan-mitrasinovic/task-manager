@@ -1,9 +1,11 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.entity.ProjectEntity;
+import com.example.backend.model.request.ProjectRequest;
 import com.example.backend.model.response.ProjectContentResponse;
 import com.example.backend.service.ProjectService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +19,10 @@ public class ProjectController {
 
   private final ProjectService projectService;
 
-  @PostMapping("/{projectName}")
-  public ProjectEntity createProject(@PathVariable String projectName) {
-    return projectService.createProject(projectName);
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public void createProject(@RequestBody ProjectRequest projectRequest) {
+    projectService.createProject(projectRequest.getName());
   }
 
   @GetMapping("/{projectId}")
@@ -30,5 +33,18 @@ public class ProjectController {
   @GetMapping
   public List<ProjectEntity> getAllProjects() {
     return projectService.getAllProjects();
+  }
+
+  @DeleteMapping("/{projectId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteProject(@PathVariable UUID projectId) {
+    projectService.deleteProject(projectId);
+  }
+
+  @PutMapping("/{projectId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void editProject(
+      @RequestBody ProjectRequest projectRequest, @PathVariable UUID projectId) {
+    projectService.editProject(projectId, projectRequest);
   }
 }

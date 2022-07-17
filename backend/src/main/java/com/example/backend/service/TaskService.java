@@ -1,8 +1,8 @@
 package com.example.backend.service;
 
-import com.example.backend.model.TaskRequest;
 import com.example.backend.model.entity.ProjectEntity;
 import com.example.backend.model.entity.TaskEntity;
+import com.example.backend.model.request.TaskRequest;
 import com.example.backend.repo.ProjectRepository;
 import com.example.backend.repo.TaskRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,19 +29,28 @@ public class TaskService {
     return allTasks;
   }
 
-  public TaskEntity createTask(TaskRequest taskRequest) {
+  public void createTask(TaskRequest taskRequest) {
     TaskEntity taskEntity = new TaskEntity();
     modelMapper.map(taskRequest, taskEntity);
     taskEntity.setColumnId(0);
     ProjectEntity projectEntity =
         projectRepository.findById(taskRequest.getProjectId()).orElseThrow(RuntimeException::new);
     taskEntity.setProject(projectEntity);
-    return taskRepository.save(taskEntity);
+    taskRepository.save(taskEntity);
   }
 
-  public TaskEntity moveTask(UUID taskId, int columnId) {
+  public void moveTask(UUID taskId, int columnId) {
     TaskEntity taskEntity = taskRepository.findById(taskId).orElseThrow(RuntimeException::new);
+    taskRepository.save(taskEntity.withColumnId(columnId));
+  }
 
-    return taskRepository.save(taskEntity.withColumnId(columnId));
+  public void editTask(UUID taskId, TaskRequest taskRequest) {
+    TaskEntity taskEntity = taskRepository.findById(taskId).orElseThrow(RuntimeException::new);
+    taskRepository.save(
+        taskEntity.withDescription(taskRequest.getDescription()).withTitle(taskRequest.getTitle()));
+  }
+
+  public void deleteTask(UUID taskId) {
+    taskRepository.deleteById(taskId);
   }
 }

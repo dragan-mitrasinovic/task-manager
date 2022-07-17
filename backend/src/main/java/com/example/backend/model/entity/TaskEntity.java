@@ -17,8 +17,8 @@ public class TaskEntity {
   @Column(length = 16)
   private UUID id;
 
-  private String title;
-  private String description;
+  @With private String title;
+  @With private String description;
   @With private int columnId;
 
   @ManyToOne
