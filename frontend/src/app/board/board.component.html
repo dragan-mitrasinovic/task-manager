@@ -13,14 +13,14 @@
             <mat-card class="tasks-container"
                       id="{{column.id}}"
                       cdkDropList
-                      [cdkDropListConnectedTo]="['1','2','3', '4', '5']"
+                      [cdkDropListConnectedTo]="['0','1','2', '3', '4']"
                       [cdkDropListData]="column.tasks"
                       (cdkDropListDropped)="drop($event)">
               <mat-card-title>
                 {{ column.name }}
               </mat-card-title>
               <mat-card class="task" *ngFor="let item of column.tasks" cdkDrag>
-                {{ item }}
+                {{ item.title }}
               </mat-card>
             </mat-card>
 

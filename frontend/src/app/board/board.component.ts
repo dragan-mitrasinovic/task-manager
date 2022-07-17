@@ -6,6 +6,9 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { Task } from '../model/task';
+import { ProjectService } from '../service/project.service';
+import { TaskService } from '../service/task.service';
 
 @Component({
   selector: 'app-board',
@@ -13,21 +16,29 @@ import {
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
-  public board: Board = new Board('Test Board', [
-    new Column('To-Do', '1', [
-      'Some random idea',
-      'This is another random idea',
-    ]),
-    new Column('In Progress', '2', ['Lorem ipsum', 'foo']),
-    new Column('In Review', '3', ['Lorem ipsum', 'foo']),
-    new Column('In Testing', '4', ['Lorem ipsum', 'foo']),
-    new Column('Done', '5', ['Lorem ipsum', 'foo']),
+  public board: Board = new Board('id', 'Init title', [
+    new Column('To-Do', '0', []),
+    new Column('In Progress', '1', []),
+    new Column('In Review', '2', []),
+    new Column('In Testing', '3', []),
+    new Column('Done', '4', []),
   ]);
 
-  constructor() {}
+  constructor(
+    private projectService: ProjectService,
+    private taskService: TaskService
+  ) {}
 
   public ngOnInit(): void {
-    console.log(this.board);
+    this.projectService.getProjectData().subscribe((data) => {
+      this.board.id = data['id'];
+      this.board.name = data['name'];
+      this.board.columns[0].tasks = data['tasks'][0];
+      this.board.columns[1].tasks = data['tasks'][1];
+      this.board.columns[2].tasks = data['tasks'][2];
+      this.board.columns[3].tasks = data['tasks'][3];
+      this.board.columns[4].tasks = data['tasks'][4];
+    });
   }
 
   public dropGrid(event: CdkDragDrop<string[]>): void {
@@ -38,7 +49,7 @@ export class BoardComponent implements OnInit {
     );
   }
 
-  public drop(event: CdkDragDrop<string[]>): void {
+  public drop(event: CdkDragDrop<Task[], any>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -52,6 +63,12 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      this.taskService
+        .moveTask(
+          event.container.data[event.currentIndex]['id'],
+          event.container['id']
+        )
+        .subscribe();
     }
   }
 }
