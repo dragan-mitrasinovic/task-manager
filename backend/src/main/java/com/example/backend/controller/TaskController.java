@@ -1,9 +1,9 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.TaskRequest;
-import com.example.backend.model.entity.TaskEntity;
+import com.example.backend.model.request.TaskRequest;
 import com.example.backend.service.TaskService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -17,12 +17,26 @@ public class TaskController {
   private final TaskService taskService;
 
   @PostMapping
-  public TaskEntity createTask(@RequestBody TaskRequest taskRequest) {
-    return taskService.createTask(taskRequest);
+  @ResponseStatus(HttpStatus.CREATED)
+  public void createTask(@RequestBody TaskRequest taskRequest) {
+    taskService.createTask(taskRequest);
   }
 
   @PutMapping("/{taskId}/{columnId}")
-  public TaskEntity moveTask(@PathVariable UUID taskId, @PathVariable int columnId) {
-    return taskService.moveTask(taskId, columnId);
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void moveTask(@PathVariable UUID taskId, @PathVariable int columnId) {
+    taskService.moveTask(taskId, columnId);
+  }
+
+  @PutMapping("/{taskId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void editTask(@PathVariable UUID taskId, @RequestBody TaskRequest taskRequest) {
+    taskService.editTask(taskId, taskRequest);
+  }
+
+  @DeleteMapping("/{taskId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteTask(@PathVariable UUID taskId) {
+    taskService.deleteTask(taskId);
   }
 }
