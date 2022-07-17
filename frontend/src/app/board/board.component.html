@@ -1,0 +1,34 @@
+<div class="root">
+  <div class="board">
+    <div class="board-wrapper">
+      <div class="board-columns">
+
+        <div cdkDropList
+             cdkDropListOrientation="horizontal" class="board-columns"
+             (cdkDropListDropped)="dropGrid($event)">
+          <div
+            cdkDragLockAxis="x" class="board-column"
+            *ngFor="let column of board.columns" cdkDrag>
+
+            <mat-card class="tasks-container"
+                      id="{{column.id}}"
+                      cdkDropList
+                      [cdkDropListConnectedTo]="['1','2','3', '4', '5']"
+                      [cdkDropListData]="column.tasks"
+                      (cdkDropListDropped)="drop($event)">
+              <mat-card-title>
+                {{ column.name }}
+              </mat-card-title>
+              <mat-card class="task" *ngFor="let item of column.tasks" cdkDrag>
+                {{ item }}
+              </mat-card>
+            </mat-card>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
