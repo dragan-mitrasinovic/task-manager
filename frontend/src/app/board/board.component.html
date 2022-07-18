@@ -16,18 +16,14 @@
                       [cdkDropListConnectedTo]="['0','1','2', '3', '4']"
                       [cdkDropListData]="column.tasks"
                       (cdkDropListDropped)="drop($event)">
-              <mat-card-title>
+              <mat-card-title class="columnTitle">
                 {{ column.name }}
               </mat-card-title>
-              <mat-card class="task" *ngFor="let item of column.tasks" cdkDrag>
-                {{ item.title }}
-              </mat-card>
-            </mat-card>
 
+              <app-task *ngFor="let task of column.tasks" [task]="task"></app-task>
+            </mat-card>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>

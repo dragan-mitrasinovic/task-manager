@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../model/board';
-import { Column } from '../model/column';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -16,13 +15,7 @@ import { TaskService } from '../service/task.service';
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
-  public board: Board = new Board('id', 'Init title', [
-    new Column('To-Do', '0', []),
-    new Column('In Progress', '1', []),
-    new Column('In Review', '2', []),
-    new Column('In Testing', '3', []),
-    new Column('Done', '4', []),
-  ]);
+  public board: Board = new Board();
 
   constructor(
     private projectService: ProjectService,
@@ -33,11 +26,9 @@ export class BoardComponent implements OnInit {
     this.projectService.getProjectData().subscribe((data) => {
       this.board.id = data['id'];
       this.board.name = data['name'];
-      this.board.columns[0].tasks = data['tasks'][0];
-      this.board.columns[1].tasks = data['tasks'][1];
-      this.board.columns[2].tasks = data['tasks'][2];
-      this.board.columns[3].tasks = data['tasks'][3];
-      this.board.columns[4].tasks = data['tasks'][4];
+      for (let i = 0; i < 5; i++) {
+        this.board.columns[i].tasks = data['tasks'][i];
+      }
     });
   }
 
