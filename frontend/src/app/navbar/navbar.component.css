@@ -14,8 +14,16 @@ h1.app-name {
 
 .sidenav-container {
   flex: 1;
+  background-color: lightgray;
 }
 
 .spacer {
   flex: 1 1 auto;
+}
+
+#add-project-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }

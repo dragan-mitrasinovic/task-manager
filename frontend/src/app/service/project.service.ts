@@ -13,4 +13,8 @@ export class ProjectService {
   getProjectData() {
     return this.http.get(this.uri + '/' + this.projectId);
   }
+
+  getAllProjects() {
+    return this.http.get(this.uri);
+  }
 }
