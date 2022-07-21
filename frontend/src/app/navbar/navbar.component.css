@@ -27,3 +27,7 @@ h1.app-name {
   justify-content: center;
   width: 100%;
 }
+
+mat-sidenav{
+  justify-content: center;
+}

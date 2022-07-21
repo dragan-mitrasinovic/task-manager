@@ -14,9 +14,14 @@ import { BoardComponent } from './board/board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
-import { TaskDialogComponent } from './task-dialog/task-dialog.component';
+import { TaskDialogComponent } from './dialogs/task-dialog/task-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TaskComponent } from './task/task.component';
+import { ProjectDialogComponent } from './dialogs/project-dialog/project-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { ConfirmProjectDeleteDialogComponent } from './dialogs/confirm-project-delete-dialog/confirm-project-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,8 @@ import { TaskComponent } from './task/task.component';
     BoardComponent,
     TaskDialogComponent,
     TaskComponent,
+    ProjectDialogComponent,
+    ConfirmProjectDeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +46,9 @@ import { TaskComponent } from './task/task.component';
     MatCardModule,
     HttpClientModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

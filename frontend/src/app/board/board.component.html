@@ -3,12 +3,9 @@
     <div class="board-wrapper">
       <div class="board-columns">
 
-        <div cdkDropList
-             cdkDropListOrientation="horizontal" class="board-columns"
-             (cdkDropListDropped)="dropGrid($event)">
-          <div
-            cdkDragLockAxis="x" class="board-column"
-            *ngFor="let column of board.columns" cdkDrag>
+        <div class="board-columns">
+          <div class="board-column"
+            *ngFor="let column of board.columns">
 
             <mat-card class="tasks-container"
                       id="{{column.id}}"

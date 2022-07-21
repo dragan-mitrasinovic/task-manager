@@ -8,6 +8,7 @@ import {
 import { Task } from '../model/task';
 import { ProjectService } from '../service/project.service';
 import { TaskService } from '../service/task.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -19,25 +20,19 @@ export class BoardComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
-    this.projectService.getProjectData().subscribe((data) => {
-      this.board.id = data['id'];
-      this.board.name = data['name'];
-      for (let i = 0; i < 5; i++) {
-        this.board.columns[i].tasks = data['tasks'][i];
-      }
-    });
-  }
-
-  public dropGrid(event: CdkDragDrop<string[]>): void {
-    moveItemInArray(
-      this.board.columns,
-      event.previousIndex,
-      event.currentIndex
-    );
+    this.projectService
+      .getProjectData(this.router.url.slice(9))
+      .subscribe((data) => {
+        this.board.name = data['name'];
+        for (let i = 0; i < 5; i++) {
+          this.board.columns[i].tasks = data['tasks'][i];
+        }
+      });
   }
 
   public drop(event: CdkDragDrop<Task[], any>): void {
