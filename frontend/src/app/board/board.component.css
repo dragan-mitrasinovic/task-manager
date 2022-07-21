@@ -32,7 +32,6 @@
   padding: 15px;
 
   border-radius: 4px;
-  background: #f6f8f9;
 }
 
 .board-column:not(:first-child) {

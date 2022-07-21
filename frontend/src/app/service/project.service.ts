@@ -8,9 +8,20 @@ export class ProjectService {
   constructor(private http: HttpClient) {}
 
   uri = 'http://localhost:8080/projects';
-  projectId = '4760161a-8ca8-4e47-9067-a1b67836a568';
 
-  getProjectData() {
-    return this.http.get(this.uri + '/' + this.projectId);
+  getProjectData(projectId: string) {
+    return this.http.get(this.uri + '/' + projectId);
+  }
+
+  getAllProjects() {
+    return this.http.get(this.uri);
+  }
+
+  createProject(name: string) {
+    return this.http.post(this.uri, { name });
+  }
+
+  deleteProject(id: string) {
+    return this.http.delete(`${this.uri}/${id}`);
   }
 }

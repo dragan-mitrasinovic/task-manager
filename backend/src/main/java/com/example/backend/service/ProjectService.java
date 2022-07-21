@@ -38,7 +38,7 @@ public class ProjectService {
   }
 
   public List<ProjectEntity> getAllProjects() {
-    return projectRepository.findAll();
+    return projectRepository.findAllByOrderByCreatedOn();
   }
 
   public void deleteProject(UUID projectId) {

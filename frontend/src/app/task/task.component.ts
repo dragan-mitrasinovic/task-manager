@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from '../model/task';
 import { MatDialog } from '@angular/material/dialog';
-import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
+import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
 
 @Component({
   selector: 'app-task',
