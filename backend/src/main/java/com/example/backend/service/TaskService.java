@@ -53,4 +53,8 @@ public class TaskService {
   public void deleteTask(UUID taskId) {
     taskRepository.deleteById(taskId);
   }
+
+  public TaskEntity getTask(UUID taskId) {
+    return taskRepository.findById(taskId).orElseThrow(RuntimeException::new);
+  }
 }
