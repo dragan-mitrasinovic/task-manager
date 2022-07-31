@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.entity.TaskEntity;
 import com.example.backend.model.request.TaskRequest;
 import com.example.backend.service.TaskService;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,11 @@ public class TaskController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteTask(@PathVariable UUID taskId) {
     taskService.deleteTask(taskId);
+  }
+
+  @GetMapping("/{taskId}")
+  @ResponseStatus(HttpStatus.OK)
+  public TaskEntity getTask(@PathVariable UUID taskId) {
+    return taskService.getTask(taskId);
   }
 }

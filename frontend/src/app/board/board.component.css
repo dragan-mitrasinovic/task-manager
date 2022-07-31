@@ -74,3 +74,9 @@
 .tasks-container.cdk-drop-list-dragging .task:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+.title_center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

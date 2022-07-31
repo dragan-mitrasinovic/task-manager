@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Task } from '../model/task';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
+import { TaskService } from '../service/task.service';
 
 @Component({
   selector: 'app-task',
@@ -11,13 +12,23 @@ import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.componen
 export class TaskComponent implements OnInit {
   @Input() task: Task;
 
-  constructor(public taskDialog: MatDialog) {}
+  constructor(public taskDialog: MatDialog, private taskService: TaskService) {}
 
   ngOnInit(): void {}
 
   openTaskDialog(task: Task) {
-    this.taskDialog.open(TaskDialogComponent, {
+    let dialogRef = this.taskDialog.open(TaskDialogComponent, {
       data: task,
+      width: '500px',
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refreshData();
+    });
+  }
+
+  refreshData() {
+    this.taskService.getTask(this.task.id).subscribe((data: Task) => {
+      this.task = data;
     });
   }
 }

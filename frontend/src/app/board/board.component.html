@@ -5,7 +5,7 @@
 
         <div class="board-columns">
           <div class="board-column"
-            *ngFor="let column of board.columns">
+               *ngFor="let column of board.columns">
 
             <mat-card class="tasks-container"
                       id="{{column.id}}"
@@ -13,11 +13,14 @@
                       [cdkDropListConnectedTo]="['0','1','2', '3', '4']"
                       [cdkDropListData]="column.tasks"
                       (cdkDropListDropped)="drop($event)">
-              <mat-card-title class="columnTitle">
-                {{ column.name }}
-              </mat-card-title>
-
-              <app-task *ngFor="let task of column.tasks" [task]="task"></app-task>
+              <div class="title_center">
+                <mat-card-title>
+                  {{ column.name }}
+                </mat-card-title>
+              </div>
+              <mat-card-content>
+                <app-task *ngFor="let task of column.tasks" [task]="task"></app-task>
+              </mat-card-content>
             </mat-card>
           </div>
         </div>
