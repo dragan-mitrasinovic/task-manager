@@ -22,6 +22,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ConfirmProjectDeleteDialogComponent } from './dialogs/confirm-project-delete-dialog/confirm-project-delete-dialog.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { AddTaskDialogComponent } from './dialogs/add-task-dialog/add-task-dialog.component';
+import { ConfirmTaskDeleteDialogComponent } from './dialogs/confirm-task-delete-dialog/confirm-task-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { ConfirmProjectDeleteDialogComponent } from './dialogs/confirm-project-d
     TaskComponent,
     ProjectDialogComponent,
     ConfirmProjectDeleteDialogComponent,
+    AddTaskDialogComponent,
+    ConfirmTaskDeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,7 @@ import { ConfirmProjectDeleteDialogComponent } from './dialogs/confirm-project-d
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatStepperModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

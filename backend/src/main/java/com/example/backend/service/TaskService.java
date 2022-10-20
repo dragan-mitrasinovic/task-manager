@@ -24,7 +24,7 @@ public class TaskService {
   public List<List<TaskEntity>> getAllTasks(UUID projectId) {
     List<List<TaskEntity>> allTasks = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
-      allTasks.add(taskRepository.findAllByColumnIdAndProjectId(i, projectId));
+      allTasks.add(taskRepository.findAllByColumnIdAndProjectIdOrderByCreatedOn(i, projectId));
     }
     return allTasks;
   }

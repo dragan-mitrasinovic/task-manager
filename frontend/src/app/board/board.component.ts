@@ -25,6 +25,13 @@ export class BoardComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.getProjectData();
+    this.taskService.boardChange.subscribe(() => {
+      this.getProjectData();
+    });
+  }
+
+  getProjectData() {
     this.projectService
       .getProjectData(this.router.url.slice(9))
       .subscribe((data) => {

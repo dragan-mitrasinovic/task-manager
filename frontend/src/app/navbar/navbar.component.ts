@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProjectDialogComponent } from '../dialogs/project-dialog/project-dialog.component';
 import { Router } from '@angular/router';
 import { ConfirmProjectDeleteDialogComponent } from '../dialogs/confirm-project-delete-dialog/confirm-project-delete-dialog.component';
+import { AddTaskDialogComponent } from '../dialogs/add-task-dialog/add-task-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +16,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     public projectDialog: MatDialog,
+    public taskDialog: MatDialog,
     private router: Router
   ) {}
 
@@ -50,5 +52,13 @@ export class NavbarComponent implements OnInit {
       }
       this.getAllProjects();
     });
+  }
+
+  createTask() {
+    let dialogRef = this.taskDialog.open(AddTaskDialogComponent, {
+      data: this.router.url.slice(9),
+      width: '500px',
+    });
+    dialogRef.afterClosed().subscribe((task) => {});
   }
 }

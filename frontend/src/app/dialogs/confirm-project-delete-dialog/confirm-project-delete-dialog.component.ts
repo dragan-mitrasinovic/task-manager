@@ -17,10 +17,6 @@ export class ConfirmProjectDeleteDialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onDismiss() {
-    this.dialogRef.close('closed');
-  }
-
   onConfirm() {
     this.projectService.deleteProject(this.data.id).subscribe(() => {
       this.dialogRef.close('confirmed');

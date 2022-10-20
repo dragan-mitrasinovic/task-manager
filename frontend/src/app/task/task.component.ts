@@ -21,8 +21,10 @@ export class TaskComponent implements OnInit {
       data: task,
       width: '500px',
     });
-    dialogRef.afterClosed().subscribe(() => {
-      this.refreshData();
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == 'deleted') {
+        this.taskService.boardChange.emit(true);
+      }
     });
   }
 

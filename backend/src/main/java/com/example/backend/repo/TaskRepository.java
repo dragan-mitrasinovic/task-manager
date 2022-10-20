@@ -10,5 +10,5 @@ import java.util.UUID;
 @Repository
 public interface TaskRepository extends JpaRepository<TaskEntity, UUID> {
 
-  List<TaskEntity> findAllByColumnIdAndProjectId(int columnId, UUID projectId);
+  List<TaskEntity> findAllByColumnIdAndProjectIdOrderByCreatedOn(int columnId, UUID projectId);
 }
